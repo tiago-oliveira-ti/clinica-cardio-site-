@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🫀 CardioVita — Site de Clínica Médica
 > Projeto de estudo de Front-End | HTML5 + CSS3 | Sem frameworks
 
@@ -7,12 +6,6 @@
 ## 📁 Estrutura de Pastas
 
 ```
-=======
-🫀 CardioVita — Site de Clínica Médica
-Projeto de estudo de Front-End | HTML5 + CSS3 | Estruturas sem
-
-📁 Estrutura de Pastas
->>>>>>> 7c4186f0fc2070e218f4e6290ea69e719afd0617
 clinica-cardio/
 │
 ├── index.html                  ← Página Principal (Home)
