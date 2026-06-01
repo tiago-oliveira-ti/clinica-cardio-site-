@@ -311,4 +311,4 @@ Rodar Lighthouse e documentar as métricas de desempenho
 Projeto desenvolvido como estudo de Front-End — ADS / Análise e Desenvolvimento de Sistemas.
 
 Dio_me
->>>>>>> 7c4186f0fc2070e218f4e6290ea69e719afd0617
+
