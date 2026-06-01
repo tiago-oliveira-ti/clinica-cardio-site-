@@ -1,0 +1,336 @@
+/* ============================================================
+   CLÍNICA CARDIO VITA — Folha de Estilo Global
+   Autor: Projeto de Estudo Front-End
+   Versão: 1.0
+   ============================================================ */
+
+/* ---------- 1. VARIÁVEIS E RESET ---------- */
+:root {
+  /* Paleta de cores */
+  --cor-primaria: #0a2540;      /* azul-marinho profundo */
+  --cor-acento:   #c8102e;      /* vermelho cardíaco */
+  --cor-acento2:  #e8304a;      /* vermelho claro hover */
+  --cor-bg:       #f7f9fc;      /* fundo geral */
+  --cor-bg2:      #ffffff;      /* fundo branco cartão */
+  --cor-texto:    #1a1a2e;      /* texto principal */
+  --cor-texto2:   #4a5568;      /* texto secundário */
+  --cor-borda:    #dde3ec;      /* bordas suaves */
+  --cor-linha:    #eaf0f8;      /* separadores */
+
+  /* Tipografia */
+  --font-titulo:  'Playfair Display', Georgia, serif;
+  --font-corpo:   'Source Sans 3', 'Segoe UI', sans-serif;
+
+  /* Espaçamento e bordas */
+  --raio:   10px;
+  --raio-lg: 18px;
+  --sombra: 0 4px 24px rgba(10,37,64,.10);
+  --sombra-hover: 0 8px 36px rgba(10,37,64,.16);
+  --transicao: all .28s ease;
+}
+
+/* Reset básico */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-corpo);
+  background-color: var(--cor-bg);
+  color: var(--cor-texto);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+img { max-width: 100%; display: block; }
+a  { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ---------- 2. TIPOGRAFIA ---------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-titulo);
+  color: var(--cor-primaria);
+  line-height: 1.25;
+}
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: .5rem; }
+h3 { font-size: 1.25rem; }
+p  { color: var(--cor-texto2); margin-bottom: 1rem; }
+
+/* ---------- 3. UTILITÁRIOS ---------- */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.secao { padding: 80px 0; }
+.secao--cinza { background: var(--cor-linha); }
+.linha-acento {
+  width: 56px; height: 4px;
+  background: var(--cor-acento);
+  border-radius: 4px;
+  margin: .6rem 0 1.4rem;
+}
+.linha-acento--centro { margin: .6rem auto 1.4rem; }
+.texto-centro { text-align: center; }
+.grade-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.grade-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.grade-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+/* ---------- 4. BOTÕES ---------- */
+.btn {
+  display: inline-block;
+  padding: .75rem 2rem;
+  border-radius: var(--raio);
+  font-family: var(--font-corpo);
+  font-weight: 600;
+  font-size: .95rem;
+  cursor: pointer;
+  transition: var(--transicao);
+  border: 2px solid transparent;
+}
+.btn--primario {
+  background: var(--cor-acento);
+  color: #fff;
+  border-color: var(--cor-acento);
+}
+.btn--primario:hover {
+  background: var(--cor-acento2);
+  border-color: var(--cor-acento2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200,16,46,.30);
+}
+.btn--outline {
+  background: transparent;
+  color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+}
+.btn--outline:hover {
+  background: var(--cor-primaria);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn--branco {
+  background: #fff;
+  color: var(--cor-acento);
+  border-color: #fff;
+}
+.btn--branco:hover {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+/* ---------- 5. CABEÇALHO / NAVEGAÇÃO ---------- */
+.cabecalho {
+  background: var(--cor-bg2);
+  border-bottom: 1px solid var(--cor-borda);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(10,37,64,.07);
+}
+.cabecalho__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.logo__icone {
+  width: 42px; height: 42px;
+  background: var(--cor-acento);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.logo__nome {
+  font-family: var(--font-titulo);
+  font-size: 1.4rem;
+  color: var(--cor-primaria);
+  font-weight: 700;
+}
+.logo__nome span { color: var(--cor-acento); }
+.logo__especialidade {
+  font-size: .7rem;
+  color: var(--cor-texto2);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-top: -2px;
+}
+.nav__lista {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.nav__lista a {
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--cor-texto);
+  letter-spacing: .02em;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: var(--transicao);
+}
+.nav__lista a:hover,
+.nav__lista a.ativo {
+  color: var(--cor-acento);
+  border-bottom-color: var(--cor-acento);
+}
+/* Menu hambúrguer (mobile) */
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav__toggle span {
+  display: block; width: 24px; height: 2px;
+  background: var(--cor-primaria);
+  border-radius: 2px;
+  transition: var(--transicao);
+}
+
+/* ---------- 6. RODAPÉ ---------- */
+.rodape {
+  background: var(--cor-primaria);
+  color: #adb9cc;
+  padding: 60px 0 0;
+}
+.rodape h4 {
+  color: #fff;
+  font-family: var(--font-titulo);
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+}
+.rodape p, .rodape a { color: #adb9cc; font-size: .9rem; }
+.rodape a:hover { color: #fff; }
+.rodape__grade {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.rodape__logo-nome {
+  font-family: var(--font-titulo);
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: .5rem;
+}
+.rodape__logo-nome span { color: var(--cor-acento); }
+.rodape__lista li { margin-bottom: .5rem; }
+.rodape__lista a::before { content: '→ '; font-size: .75rem; }
+.rodape__copy {
+  text-align: center;
+  padding: 1.2rem 0;
+  font-size: .8rem;
+}
+
+/* ---------- 7. CARDS ---------- */
+.card {
+  background: var(--cor-bg2);
+  border-radius: var(--raio-lg);
+  padding: 2rem;
+  box-shadow: var(--sombra);
+  transition: var(--transicao);
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--sombra-hover); }
+.card__icone {
+  width: 52px; height: 52px;
+  background: #fdecea;
+  color: var(--cor-acento);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* ---------- 8. TABELA ---------- */
+.tabela-wrapper { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .92rem;
+}
+thead tr { background: var(--cor-primaria); color: #fff; }
+thead th { padding: .9rem 1.2rem; text-align: left; font-weight: 600; letter-spacing: .03em; }
+tbody tr:nth-child(even) { background: var(--cor-linha); }
+tbody tr:hover { background: #dde9f6; }
+tbody td { padding: .85rem 1.2rem; color: var(--cor-texto2); border-bottom: 1px solid var(--cor-borda); }
+tbody td:first-child { font-weight: 600; color: var(--cor-primaria); }
+
+/* ---------- 9. FORMULÁRIO ---------- */
+.form-grupo {
+  margin-bottom: 1.4rem;
+}
+.form-grupo label {
+  display: block;
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--cor-primaria);
+  margin-bottom: .4rem;
+}
+.form-grupo input,
+.form-grupo select,
+.form-grupo textarea {
+  width: 100%;
+  padding: .75rem 1rem;
+  border: 1.5px solid var(--cor-borda);
+  border-radius: var(--raio);
+  font-family: var(--font-corpo);
+  font-size: 1rem;
+  color: var(--cor-texto);
+  background: var(--cor-bg2);
+  transition: border-color .2s;
+}
+.form-grupo input:focus,
+.form-grupo select:focus,
+.form-grupo textarea:focus {
+  outline: none;
+  border-color: var(--cor-acento);
+  box-shadow: 0 0 0 3px rgba(200,16,46,.12);
+}
+.form-grupo textarea { resize: vertical; min-height: 130px; }
+.form-botoes { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* ---------- 10. RESPONSIVIDADE ---------- */
+@media (max-width: 900px) {
+  .grade-2, .grade-3, .grade-4 { grid-template-columns: 1fr; }
+  .rodape__grade { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav__toggle { display: flex; }
+  .nav__lista {
+    display: none;
+    position: absolute;
+    top: 70px; left: 0; right: 0;
+    background: var(--cor-bg2);
+    flex-direction: column;
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--cor-borda);
+    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    gap: 1.2rem;
+  }
+  .nav__lista.aberto { display: flex; }
+  .secao { padding: 56px 0; }
+}
+
+@media (max-width: 560px) {
+  .rodape__grade { grid-template-columns: 1fr; }
+}

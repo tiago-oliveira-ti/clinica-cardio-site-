@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- ============================================================
+       Clínica CardioVita — Página Sobre (pages/sobre.html)
+       Descrição: Apresentação da clínica, missão, visão e valores
+       ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Conheça a história e os valores da Clínica CardioVita — referência em Cardiologia em Caruaru-PE." />
+  <title>Sobre a Clínica — CardioVita</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <style>
+    /* ---- CABEÇALHO INTERNO DE PÁGINA ---- */
+    .page-hero {
+      background: linear-gradient(135deg, var(--cor-primaria) 60%, #163760 100%);
+      color: #fff;
+      padding: 72px 0 60px;
+      text-align: center;
+    }
+    .page-hero h1 { color: #fff; margin-bottom: .5rem; }
+    .page-hero p  { color: #b0c4de; font-size: 1.05rem; }
+    .breadcrumb {
+      display: flex;
+      justify-content: center;
+      gap: .5rem;
+      font-size: .82rem;
+      color: #7a9cc6;
+      margin-bottom: 1rem;
+    }
+    .breadcrumb a { color: #7a9cc6; }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb span { color: #5a7faa; }
+
+    /* ---- HISTÓRIA ---- */
+    .historia__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .historia__img {
+      background: var(--cor-linha);
+      border-radius: var(--raio-lg);
+      height: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      color: #8fa8c6;
+      border: 2px dashed var(--cor-borda);
+      font-size: .9rem;
+    }
+    .historia__img span:first-child { font-size: 3rem; }
+    .historia__linha {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      color: var(--cor-texto2);
+      font-size: .9rem;
+      margin-bottom: .6rem;
+    }
+    .historia__linha strong { color: var(--cor-primaria); min-width: 32px; }
+
+    /* ---- LINHA DO TEMPO ---- */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 4px; bottom: 0;
+      width: 3px;
+      background: var(--cor-borda);
+      border-radius: 3px;
+    }
+    .timeline__item { position: relative; margin-bottom: 2rem; }
+    .timeline__dot {
+      width: 16px; height: 16px;
+      background: var(--cor-acento);
+      border-radius: 50%;
+      position: absolute;
+      left: -2.45rem; top: 4px;
+      border: 3px solid var(--cor-bg2);
+      box-shadow: 0 0 0 2px var(--cor-acento);
+    }
+    .timeline__ano {
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--cor-acento);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: .2rem;
+    }
+    .timeline__titulo { font-weight: 700; color: var(--cor-primaria); margin-bottom: .2rem; }
+    .timeline__texto { font-size: .9rem; color: var(--cor-texto2); margin: 0; }
+
+    /* ---- MVV (Missão, Visão, Valores) ---- */
+    .mvv__card {
+      background: var(--cor-bg2);
+      border-radius: var(--raio-lg);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--sombra);
+      border-top: 4px solid var(--cor-acento);
+    }
+    .mvv__icone {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .mvv__card h3 { margin-bottom: .75rem; }
+    .mvv__card p { margin: 0; font-size: .95rem; }
+
+    /* ---- VALORES LISTA ---- */
+    .valores__lista {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .75rem;
+      margin-top: .75rem;
+    }
+    .valor__item {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .9rem;
+      color: var(--cor-texto2);
+    }
+    .valor__item::before {
+      content: '♥';
+      color: var(--cor-acento);
+      font-size: .85rem;
+      flex-shrink: 0;
+    }
+
+    /* ---- EQUIPE ---- */
+    .medico__card {
+      background: var(--cor-bg2);
+      border-radius: var(--raio-lg);
+      overflow: hidden;
+      box-shadow: var(--sombra);
+      transition: var(--transicao);
+    }
+    .medico__card:hover { transform: translateY(-4px); box-shadow: var(--sombra-hover); }
+    .medico__foto {
+      background: linear-gradient(135deg, var(--cor-primaria), #2a6496);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    .medico__info { padding: 1.5rem; }
+    .medico__info h3 { margin-bottom: .15rem; font-size: 1.1rem; }
+    .medico__crm {
+      font-size: .78rem;
+      color: var(--cor-acento);
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: .4rem;
+    }
+    .medico__info p { font-size: .88rem; margin: 0; }
+
+    /* ---- ESTRUTURA ---- */
+    .estrutura__item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      padding: 1.2rem;
+      background: var(--cor-bg2);
+      border-radius: var(--raio);
+      box-shadow: var(--sombra);
+    }
+    .estrutura__icone {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    .estrutura__item h4 { margin-bottom: .2rem; font-size: 1rem; }
+    .estrutura__item p  { font-size: .88rem; margin: 0; }
+
+    @media (max-width: 768px) {
+      .historia__grid { grid-template-columns: 1fr; }
+      .historia__img   { height: 220px; }
+      .valores__lista  { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- CABEÇALHO -->
+  <header class="cabecalho" role="banner">
+    <div class="cabecalho__inner">
+      <a href="../index.html" class="logo" aria-label="CardioVita — Página inicial">
+        <div class="logo__icone" aria-hidden="true">♥</div>
+        <div>
+          <div class="logo__nome">Cardio<span>Vita</span></div>
+          <div class="logo__especialidade">Clínica de Cardiologia</div>
+        </div>
+      </a>
+      <button class="nav__toggle" aria-label="Abrir menu" id="menuToggle">
+        <span></span><span></span><span></span>
+      </button>
+      <nav aria-label="Navegação principal">
+        <ul class="nav__lista" id="navLista" role="list">
+          <li><a href="../index.html">Início</a></li>
+          <li><a href="sobre.html" class="ativo">Sobre</a></li>
+          <li><a href="horario.html">Horários</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="contato.html" class="btn btn--primario" style="padding:.5rem 1.3rem">Agendar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- HERO INTERNO -->
+  <section class="page-hero" aria-labelledby="sobre-titulo">
+    <div class="container">
+      <!-- Breadcrumb de navegação auxiliar -->
+      <nav class="breadcrumb" aria-label="Caminho de navegação">
+        <a href="../index.html">Início</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">Sobre</span>
+      </nav>
+      <h1 id="sobre-titulo">Sobre a CardioVita</h1>
+      <p>Conheça nossa história, equipe e os valores que guiam nosso trabalho.</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEÇÃO 1 — HISTÓRIA
+       ============================================================ -->
+  <section class="secao" aria-labelledby="historia-titulo">
+    <div class="container">
+      <div class="historia__grid">
+
+        <!-- Imagem placeholder -->
+        <div class="historia__img" role="img" aria-label="Foto da fachada da clínica">
+          <span aria-hidden="true">🏥</span>
+          <span>[ Foto da Clínica ]</span>
+          <small>Substitua por imagem real</small>
+        </div>
+
+        <!-- Texto -->
+        <div>
+          <h2 id="historia-titulo">Nossa História</h2>
+          <div class="linha-acento"></div>
+          <p>
+            A <strong>CardioVita</strong> nasceu em 2008 da visão do Dr. Ricardo Almeida, 
+            cardiologista formado pela UFPE com especialização em São Paulo. Ao retornar ao 
+            Agreste pernambucano, percebeu a carência de atendimento cardiovascular de 
+            qualidade na região e decidiu mudar esse cenário.
+          </p>
+          <p>
+            Em mais de 15 anos de atuação, a clínica cresceu e se consolidou como 
+            referência em Cardiologia em Caruaru e cidades vizinhas, reunindo uma equipe 
+            multidisciplinar comprometida com a saúde cardíaca de cada paciente.
+          </p>
+
+          <!-- Destaques numéricos -->
+          <div style="margin-top:1.5rem">
+            <div class="historia__linha">
+              <strong>2008</strong> Fundação da clínica com 1 consultório
+            </div>
+            <div class="historia__linha">
+              <strong>2012</strong> Expansão para 3 consultórios e novo setor de exames
+            </div>
+            <div class="historia__linha">
+              <strong>2018</strong> Inauguração do espaço de exames de imagem
+            </div>
+            <div class="historia__linha">
+              <strong>2024</strong> Novo sistema digital de prontuário eletrônico
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEÇÃO 2 — LINHA DO TEMPO
+       ============================================================ -->
+  <section class="secao secao--cinza" aria-labelledby="trajetoria-titulo">
+    <div class="container">
+      <div class="grade-2" style="gap:4rem;align-items:start">
+
+        <div>
+          <h2 id="trajetoria-titulo">Nossa Trajetória</h2>
+          <div class="linha-acento"></div>
+          <p>Cada etapa da nossa história representa um compromisso renovado com a saúde cardiovascular dos nossos pacientes.</p>
+
+          <!-- Linha do tempo -->
+          <div class="timeline" role="list">
+            <div class="timeline__item" role="listitem">
+              <div class="timeline__dot" aria-hidden="true"></div>
+              <div class="timeline__ano">2008</div>
+              <div class="timeline__titulo">Fundação</div>
+              <p class="timeline__texto">Abertura da primeira sede com consultório e eletrocardiograma.</p>
+            </div>
+            <div class="timeline__item" role="listitem">
+              <div class="timeline__dot" aria-hidden="true"></div>
+              <div class="timeline__ano">2012</div>
+              <div class="timeline__titulo">Expansão</div>
+              <p class="timeline__texto">Novos consultórios e incorporação do ecocardiograma.</p>
+            </div>
+            <div class="timeline__item" role="listitem">
+              <div class="timeline__dot" aria-hidden="true"></div>
+              <div class="timeline__ano">2018</div>
+              <div class="timeline__titulo">Centro de Imagem</div>
+              <p class="timeline__texto">Inauguração do setor de diagnóstico por imagem cardiovascular.</p>
+            </div>
+            <div class="timeline__item" role="listitem">
+              <div class="timeline__dot" aria-hidden="true"></div>
+              <div class="timeline__ano">2024</div>
+              <div class="timeline__titulo">Transformação Digital</div>
+              <p class="timeline__texto">Prontuário eletrônico e agendamento online integrado.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estrutura da clínica -->
+        <div>
+          <h2>Nossa Estrutura</h2>
+          <div class="linha-acento"></div>
+          <p>Um ambiente moderno e acolhedor pensado para o conforto dos pacientes.</p>
+
+          <div style="display:flex;flex-direction:column;gap:1rem">
+            <div class="estrutura__item">
+              <span class="estrutura__icone" aria-hidden="true">🏠</span>
+              <div>
+                <h4>Recepção Ampla</h4>
+                <p>Espaço climatizado com Wi-Fi e TV para aguardar com conforto.</p>
+              </div>
+            </div>
+            <div class="estrutura__item">
+              <span class="estrutura__icone" aria-hidden="true">🔬</span>
+              <div>
+                <h4>Sala de Exames</h4>
+                <p>Equipada com aparelhos de última geração para diagnósticos precisos.</p>
+              </div>
+            </div>
+            <div class="estrutura__item">
+              <span class="estrutura__icone" aria-hidden="true">♿</span>
+              <div>
+                <h4>Acessibilidade</h4>
+                <p>Rampas, banheiro adaptado e estacionamento para pessoas com deficiência.</p>
+              </div>
+            </div>
+            <div class="estrutura__item">
+              <span class="estrutura__icone" aria-hidden="true">📋</span>
+              <div>
+                <h4>Prontuário Eletrônico</h4>
+                <p>Seus dados e histórico sempre organizados e acessíveis com segurança.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEÇÃO 3 — MISSÃO, VISÃO E VALORES
+       ============================================================ -->
+  <section class="secao" aria-labelledby="mvv-titulo">
+    <div class="container">
+
+      <div class="texto-centro" style="margin-bottom:3rem">
+        <h2 id="mvv-titulo">Missão, Visão e Valores</h2>
+        <div class="linha-acento linha-acento--centro"></div>
+        <p style="max-width:500px;margin:0 auto">
+          Princípios que orientam cada decisão e cada consulta na CardioVita.
+        </p>
+      </div>
+
+      <div class="grade-3">
+
+        <!-- Missão -->
+        <div class="mvv__card" role="article" aria-label="Missão">
+          <span class="mvv__icone" aria-hidden="true">🎯</span>
+          <h3>Missão</h3>
+          <p>
+            Promover saúde cardiovascular de qualidade, acessível e humanizada, 
+            contribuindo para a longevidade e qualidade de vida dos nossos pacientes 
+            e da comunidade do Agreste pernambucano.
+          </p>
+        </div>
+
+        <!-- Visão -->
+        <div class="mvv__card" role="article" aria-label="Visão">
+          <span class="mvv__icone" aria-hidden="true">🔭</span>
+          <h3>Visão</h3>
+          <p>
+            Ser reconhecida até 2030 como a principal referência em Cardiologia 
+            no interior de Pernambuco, integrando inovação tecnológica e 
+            excelência no atendimento ao paciente.
+          </p>
+        </div>
+
+        <!-- Valores -->
+        <div class="mvv__card" role="article" aria-label="Valores">
+          <span class="mvv__icone" aria-hidden="true">💎</span>
+          <h3>Valores</h3>
+          <div class="valores__lista" role="list">
+            <span class="valor__item" role="listitem">Ética</span>
+            <span class="valor__item" role="listitem">Empatia</span>
+            <span class="valor__item" role="listitem">Excelência</span>
+            <span class="valor__item" role="listitem">Inovação</span>
+            <span class="valor__item" role="listitem">Responsabilidade</span>
+            <span class="valor__item" role="listitem">Humanização</span>
+            <span class="valor__item" role="listitem">Transparência</span>
+            <span class="valor__item" role="listitem">Acolhimento</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEÇÃO 4 — EQUIPE MÉDICA
+       ============================================================ -->
+  <section class="secao secao--cinza" aria-labelledby="equipe-titulo">
+    <div class="container">
+
+      <div class="texto-centro" style="margin-bottom:3rem">
+        <h2 id="equipe-titulo">Nossa Equipe</h2>
+        <div class="linha-acento linha-acento--centro"></div>
+        <p>Profissionais experientes e dedicados ao cuidado do seu coração.</p>
+      </div>
+
+      <div class="grade-3">
+
+        <!-- Médico 1 -->
+        <article class="medico__card" aria-label="Dr. Ricardo Almeida">
+          <div class="medico__foto" aria-hidden="true">👨‍⚕️</div>
+          <div class="medico__info">
+            <h3>Dr. Ricardo Almeida</h3>
+            <div class="medico__crm">CRM/PE 12345 | Diretor Clínico</div>
+            <p>Cardiologista com 20 anos de experiência. Especialista em cardiopatias isquêmicas e insuficiência cardíaca.</p>
+          </div>
+        </article>
+
+        <!-- Médica 2 -->
+        <article class="medico__card" aria-label="Dra. Fernanda Souza">
+          <div class="medico__foto" aria-hidden="true">👩‍⚕️</div>
+          <div class="medico__info">
+            <h3>Dra. Fernanda Souza</h3>
+            <div class="medico__crm">CRM/PE 54321 | Cardiologista</div>
+            <p>Especialista em cardiologia preventiva e diagnóstico por imagem. Mestre em Ciências Cardiovasculares.</p>
+          </div>
+        </article>
+
+        <!-- Médico 3 -->
+        <article class="medico__card" aria-label="Dr. Marcos Lima">
+          <div class="medico__foto" aria-hidden="true">👨‍⚕️</div>
+          <div class="medico__info">
+            <h3>Dr. Marcos Lima</h3>
+            <div class="medico__crm">CRM/PE 67890 | Arritmologista</div>
+            <p>Especialista em arritmias cardíacas e eletrofisiologia. Certificado pela Sociedade Brasileira de Cardiologia.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- RODAPÉ -->
+  <footer class="rodape" role="contentinfo">
+    <div class="container">
+      <div class="rodape__grade">
+        <div>
+          <div class="rodape__logo-nome">Cardio<span>Vita</span></div>
+          <p>Clínica de Cardiologia dedicada à saúde do seu coração.</p>
+          <p style="margin-top:.5rem">📍 Av. Rio Branco, 420 — Caruaru, PE</p>
+        </div>
+        <div>
+          <h4>Navegação</h4>
+          <ul class="rodape__lista" role="list">
+            <li><a href="../index.html">Início</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="horario.html">Horários</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Serviços</h4>
+          <ul class="rodape__lista" role="list">
+            <li><a href="#">Consulta Cardiológica</a></li>
+            <li><a href="#">Eletrocardiograma</a></li>
+            <li><a href="#">Ecocardiograma</a></li>
+            <li><a href="#">Holter 24h</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <p>📞 (81) 3000-0000</p>
+          <p>💬 (81) 99000-0000</p>
+          <p>✉️ contato@cardiovita.com.br</p>
+        </div>
+      </div>
+      <div class="rodape__copy">
+        <p>© 2025 CardioVita — Projeto de estudo Front-End.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const navLista = document.getElementById('navLista');
+    toggle.addEventListener('click', () => {
+      const aberto = navLista.classList.toggle('aberto');
+      toggle.setAttribute('aria-expanded', aberto);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- ============================================================
+       Clínica CardioVita — Horários e Valores (pages/horario.html)
+       Descrição: Tabela completa de especialidades, horários e valores
+       ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Horários de atendimento e valores da Clínica CardioVita — Cardiologia em Caruaru-PE." />
+  <title>Horários e Valores — CardioVita</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <style>
+    /* ---- HERO INTERNO ---- */
+    .page-hero {
+      background: linear-gradient(135deg, var(--cor-primaria) 60%, #163760 100%);
+      color: #fff; padding: 72px 0 60px; text-align: center;
+    }
+    .page-hero h1 { color: #fff; margin-bottom: .5rem; }
+    .page-hero p  { color: #b0c4de; }
+    .breadcrumb {
+      display: flex; justify-content: center; gap: .5rem;
+      font-size: .82rem; color: #7a9cc6; margin-bottom: 1rem;
+    }
+    .breadcrumb a { color: #7a9cc6; }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb span { color: #5a7faa; }
+
+    /* ---- AVISOS ---- */
+    .aviso {
+      display: flex;
+      gap: .75rem;
+      align-items: flex-start;
+      background: #fef9e7;
+      border: 1px solid #f9c84b;
+      border-left: 4px solid #f9c84b;
+      border-radius: var(--raio);
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      font-size: .92rem;
+      color: #7d6608;
+    }
+    .aviso--azul {
+      background: #eaf4fb;
+      border-color: #3498db;
+      border-left-color: #3498db;
+      color: #1a4a7c;
+    }
+
+    /* ---- LEGENDA ---- */
+    .legenda {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+      font-size: .85rem;
+    }
+    .legenda__item { display: flex; align-items: center; gap: .4rem; }
+    .legenda__cor {
+      width: 14px; height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .cor-manha  { background: #d4edda; }
+    .cor-tarde  { background: #cce5ff; }
+    .cor-sabado { background: #ffeeba; }
+    .cor-nao    { background: #f8d7da; }
+
+    /* ---- BADGE de status ---- */
+    .badge {
+      display: inline-block;
+      padding: .2rem .7rem;
+      border-radius: 99px;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+    }
+    .badge--sim    { background: #d4edda; color: #155724; }
+    .badge--nao    { background: #f8d7da; color: #721c24; }
+    .badge--conv   { background: #e2d9f3; color: #4a235a; }
+    .badge--sab    { background: #ffeeba; color: #856404; }
+
+    /* ---- CARDS DE CONVÊNIOS ---- */
+    .convenio__card {
+      background: var(--cor-bg2);
+      border: 1.5px solid var(--cor-borda);
+      border-radius: var(--raio);
+      padding: 1rem 1.2rem;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--cor-primaria);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .convenio__card span:first-child { font-size: 1.3rem; }
+
+    /* ---- CARDS DE INFORMAÇÃO ---- */
+    .info-card {
+      background: var(--cor-bg2);
+      border-radius: var(--raio-lg);
+      padding: 1.8rem;
+      box-shadow: var(--sombra);
+    }
+    .info-card h3 { margin-bottom: 1rem; font-size: 1.1rem; }
+    .info-lista li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .65rem 0;
+      border-bottom: 1px solid var(--cor-linha);
+      font-size: .92rem;
+      gap: 1rem;
+    }
+    .info-lista li:last-child { border-bottom: none; }
+    .info-lista .label { color: var(--cor-texto2); }
+    .info-lista .valor-txt { font-weight: 700; color: var(--cor-primaria); text-align: right; }
+    .info-lista .valor-txt.verde { color: #27ae60; }
+
+    /* ---- NOTA DE PREÇO ---- */
+    .nota-preco {
+      background: var(--cor-linha);
+      border-radius: var(--raio);
+      padding: .9rem 1.2rem;
+      font-size: .83rem;
+      color: var(--cor-texto2);
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- CABEÇALHO -->
+  <header class="cabecalho" role="banner">
+    <div class="cabecalho__inner">
+      <a href="../index.html" class="logo" aria-label="CardioVita — Página inicial">
+        <div class="logo__icone" aria-hidden="true">♥</div>
+        <div>
+          <div class="logo__nome">Cardio<span>Vita</span></div>
+          <div class="logo__especialidade">Clínica de Cardiologia</div>
+        </div>
+      </a>
+      <button class="nav__toggle" aria-label="Abrir menu" id="menuToggle">
+        <span></span><span></span><span></span>
+      </button>
+      <nav aria-label="Navegação principal">
+        <ul class="nav__lista" id="navLista" role="list">
+          <li><a href="../index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="horario.html" class="ativo">Horários</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="contato.html" class="btn btn--primario" style="padding:.5rem 1.3rem">Agendar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- HERO INTERNO -->
+  <section class="page-hero" aria-labelledby="hor-titulo">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Caminho de navegação">
+        <a href="../index.html">Início</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">Horários e Valores</span>
+      </nav>
+      <h1 id="hor-titulo">Horários e Valores</h1>
+      <p>Consulte os dias, horários e valores de cada especialidade e exame.</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEÇÃO 1 — TABELA DE HORÁRIOS POR ESPECIALIDADE
+       ============================================================ -->
+  <section class="secao" aria-labelledby="tabela-titulo">
+    <div class="container">
+
+      <h2 id="tabela-titulo">Atendimento por Especialidade</h2>
+      <div class="linha-acento"></div>
+      <p>Veja os horários disponíveis para cada médico da equipe CardioVita.</p>
+
+      <!-- Aviso informativo -->
+      <div class="aviso aviso--azul" role="note" aria-label="Informação importante">
+        <span aria-hidden="true">ℹ️</span>
+        <span><strong>Agendamento:</strong> Consultas devem ser agendadas com antecedência pelo telefone (81) 3000-0000 ou WhatsApp (81) 99000-0000. Não atendemos sem agendamento prévio.</span>
+      </div>
+
+      <!-- Tabela de especialidades e horários -->
+      <div class="tabela-wrapper">
+        <table aria-label="Horários de atendimento por especialidade">
+          <caption style="text-align:left;font-size:.85rem;color:var(--cor-texto2);margin-bottom:.8rem;padding:.5rem 0">
+            Tabela atualizada em junho de 2025. Horários sujeitos a alteração — confirme por telefone.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Especialidade / Médico</th>
+              <th scope="col">Segunda</th>
+              <th scope="col">Terça</th>
+              <th scope="col">Quarta</th>
+              <th scope="col">Quinta</th>
+              <th scope="col">Sexta</th>
+              <th scope="col">Sábado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Linha 1 -->
+            <tr>
+              <td>
+                <strong>Cardiologia Geral</strong><br>
+                <small style="font-weight:400;color:var(--cor-texto2)">Dr. Ricardo Almeida</small>
+              </td>
+              <td>08h–12h</td>
+              <td>—</td>
+              <td>08h–12h</td>
+              <td>14h–18h</td>
+              <td>08h–12h</td>
+              <td>08h–11h</td>
+            </tr>
+            <!-- Linha 2 -->
+            <tr>
+              <td>
+                <strong>Cardiologia Preventiva</strong><br>
+                <small style="font-weight:400;color:var(--cor-texto2)">Dra. Fernanda Souza</small>
+              </td>
+              <td>14h–18h</td>
+              <td>08h–12h</td>
+              <td>—</td>
+              <td>08h–12h</td>
+              <td>14h–18h</td>
+              <td>—</td>
+            </tr>
+            <!-- Linha 3 -->
+            <tr>
+              <td>
+                <strong>Arritmologia</strong><br>
+                <small style="font-weight:400;color:var(--cor-texto2)">Dr. Marcos Lima</small>
+              </td>
+              <td>—</td>
+              <td>14h–18h</td>
+              <td>14h–18h</td>
+              <td>—</td>
+              <td>08h–12h</td>
+              <td>—</td>
+            </tr>
+            <!-- Linha 4 -->
+            <tr>
+              <td>
+                <strong>Cardiologia Pediátrica</strong><br>
+                <small style="font-weight:400;color:var(--cor-texto2)">Dra. Camila Ramos</small>
+              </td>
+              <td>—</td>
+              <td>08h–12h</td>
+              <td>08h–12h</td>
+              <td>14h–18h</td>
+              <td>—</td>
+              <td>09h–11h</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEÇÃO 2 — TABELA DE EXAMES
+       ============================================================ -->
+  <section class="secao secao--cinza" aria-labelledby="exames-titulo">
+    <div class="container">
+
+      <h2 id="exames-titulo">Exames Cardiológicos</h2>
+      <div class="linha-acento"></div>
+      <p>Disponibilidade, duração e valores dos principais exames realizados na clínica.</p>
+
+      <div class="aviso" role="note">
+        <span aria-hidden="true">⚠️</span>
+        <span><strong>Atenção:</strong> Exames requerem encaminhamento médico. Valores são referências para pagamento particular. Consulte seu convênio antes de agendar.</span>
+      </div>
+
+      <div class="tabela-wrapper">
+        <table aria-label="Exames cardiológicos, disponibilidade e valores">
+          <thead>
+            <tr>
+              <th scope="col">Exame</th>
+              <th scope="col">Dias Disponíveis</th>
+              <th scope="col">Horário</th>
+              <th scope="col">Duração</th>
+              <th scope="col">Valor Particular</th>
+              <th scope="col">Convênio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Eletrocardiograma (ECG)</td>
+              <td>Seg a Sex</td>
+              <td>08h–17h</td>
+              <td>≈ 20 min</td>
+              <td>R$ 80,00</td>
+              <td><span class="badge badge--sim">Aceito</span></td>
+            </tr>
+            <tr>
+              <td>Ecocardiograma</td>
+              <td>Ter / Qui</td>
+              <td>08h–16h</td>
+              <td>≈ 45 min</td>
+              <td>R$ 280,00</td>
+              <td><span class="badge badge--sim">Aceito</span></td>
+            </tr>
+            <tr>
+              <td>Holter 24 horas</td>
+              <td>Seg / Qua / Sex</td>
+              <td>08h–11h</td>
+              <td>24h (uso)</td>
+              <td>R$ 220,00</td>
+              <td><span class="badge badge--sim">Aceito</span></td>
+            </tr>
+            <tr>
+              <td>Teste Ergométrico (Esteira)</td>
+              <td>Seg / Qua</td>
+              <td>07h–10h</td>
+              <td>≈ 60 min</td>
+              <td>R$ 320,00</td>
+              <td><span class="badge badge--conv">Consultar</span></td>
+            </tr>
+            <tr>
+              <td>MAPA (Monitoramento Ambulatorial)</td>
+              <td>Ter / Qui</td>
+              <td>08h–11h</td>
+              <td>24h (uso)</td>
+              <td>R$ 190,00</td>
+              <td><span class="badge badge--sim">Aceito</span></td>
+            </tr>
+            <tr>
+              <td>Consulta Cardiológica</td>
+              <td>Seg a Sáb*</td>
+              <td>Conforme agenda</td>
+              <td>≈ 40 min</td>
+              <td>R$ 250,00</td>
+              <td><span class="badge badge--sim">Aceito</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="nota-preco">
+        * Sábado somente Dr. Ricardo Almeida e Dra. Camila Ramos, conforme agenda. 
+        Valores referentes a janeiro/2025. Sujeitos a reajuste sem aviso prévio. 
+        Desconto de 10% para pagamento à vista em dinheiro.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEÇÃO 3 — CONVÊNIOS E INFORMAÇÕES ADICIONAIS
+       ============================================================ -->
+  <section class="secao" aria-labelledby="convenios-titulo">
+    <div class="container">
+
+      <div class="grade-2" style="gap:4rem;align-items:start">
+
+        <!-- Convênios aceitos -->
+        <div>
+          <h2 id="convenios-titulo">Convênios Aceitos</h2>
+          <div class="linha-acento"></div>
+          <p>Trabalhamos com os principais planos de saúde da região. Verifique a cobertura do seu plano antes de agendar.</p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.5rem">
+            <div class="convenio__card"><span aria-hidden="true">🏥</span> Unimed</div>
+            <div class="convenio__card"><span aria-hidden="true">🏥</span> Bradesco Saúde</div>
+            <div class="convenio__card"><span aria-hidden="true">🏥</span> SulAmérica</div>
+            <div class="convenio__card"><span aria-hidden="true">🏥</span> Amil</div>
+            <div class="convenio__card"><span aria-hidden="true">🏥</span> Porto Seguro</div>
+            <div class="convenio__card"><span aria-hidden="true">🏥</span> Hapvida</div>
+            <div class="convenio__card"><span aria-hidden="true">🏥</span> NotreDame</div>
+            <div class="convenio__card"><span aria-hidden="true">🏥</span> GreenLine</div>
+          </div>
+
+          <div class="aviso aviso--azul" style="margin-top:1.5rem" role="note">
+            <span aria-hidden="true">ℹ️</span>
+            <span>Não encontrou seu convênio? Entre em contato — nossa lista é atualizada periodicamente.</span>
+          </div>
+        </div>
+
+        <!-- Formas de pagamento e outras informações -->
+        <div>
+          <h2>Pagamento & Informações</h2>
+          <div class="linha-acento"></div>
+
+          <!-- Card formas de pagamento -->
+          <div class="info-card" style="margin-bottom:1.5rem" aria-label="Formas de pagamento">
+            <h3>💳 Formas de Pagamento</h3>
+            <ul class="info-lista" role="list">
+              <li>
+                <span class="label">Dinheiro</span>
+                <span class="valor-txt verde">✔ Aceito (10% desconto)</span>
+              </li>
+              <li>
+                <span class="label">PIX</span>
+                <span class="valor-txt verde">✔ Aceito</span>
+              </li>
+              <li>
+                <span class="label">Cartão de Débito</span>
+                <span class="valor-txt verde">✔ Aceito</span>
+              </li>
+              <li>
+                <span class="label">Cartão de Crédito</span>
+                <span class="valor-txt">Até 3x sem juros</span>
+              </li>
+              <li>
+                <span class="label">Cheque</span>
+                <span class="valor-txt" style="color:#e74c3c">✘ Não aceito</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Card funcionamento -->
+          <div class="info-card" aria-label="Horário de funcionamento da clínica">
+            <h3>🕐 Funcionamento da Clínica</h3>
+            <ul class="info-lista" role="list">
+              <li><span class="label">Segunda a Sexta</span><span class="valor-txt">07h30 – 18h30</span></li>
+              <li><span class="label">Sábado</span><span class="valor-txt">08h00 – 12h00</span></li>
+              <li><span class="label">Domingo</span><span class="valor-txt" style="color:#e74c3c">Fechado</span></li>
+              <li><span class="label">Feriados</span><span class="valor-txt" style="color:#e74c3c">Fechado</span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <section style="background:var(--cor-primaria);padding:60px 0;text-align:center">
+    <div class="container">
+      <h2 style="color:#fff;margin-bottom:.5rem">Pronto para agendar?</h2>
+      <p style="color:#b0c4de;margin-bottom:1.8rem">Ligue ou mande mensagem — nosso time está pronto para te atender.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <a href="contato.html" class="btn btn--primario">Formulário de Contato</a>
+        <a href="tel:+558130000000" class="btn btn--outline" style="color:#fff;border-color:rgba(255,255,255,.4)">📞 (81) 3000-0000</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- RODAPÉ -->
+  <footer class="rodape" role="contentinfo">
+    <div class="container">
+      <div class="rodape__grade">
+        <div>
+          <div class="rodape__logo-nome">Cardio<span>Vita</span></div>
+          <p>Clínica de Cardiologia dedicada à saúde do seu coração.</p>
+          <p style="margin-top:.5rem">📍 Av. Rio Branco, 420 — Caruaru, PE</p>
+        </div>
+        <div>
+          <h4>Navegação</h4>
+          <ul class="rodape__lista" role="list">
+            <li><a href="../index.html">Início</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="horario.html">Horários</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Serviços</h4>
+          <ul class="rodape__lista" role="list">
+            <li><a href="#">Consulta Cardiológica</a></li>
+            <li><a href="#">Eletrocardiograma</a></li>
+            <li><a href="#">Ecocardiograma</a></li>
+            <li><a href="#">Holter 24h</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <p>📞 (81) 3000-0000</p>
+          <p>💬 (81) 99000-0000</p>
+          <p>✉️ contato@cardiovita.com.br</p>
+        </div>
+      </div>
+      <div class="rodape__copy">
+        <p>© 2025 CardioVita — Projeto de estudo Front-End.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const navLista = document.getElementById('navLista');
+    toggle.addEventListener('click', () => {
+      const aberto = navLista.classList.toggle('aberto');
+      toggle.setAttribute('aria-expanded', aberto);
+    });
+  </script>
+
+</body>
+</html>

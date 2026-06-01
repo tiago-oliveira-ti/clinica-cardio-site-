@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- ============================================================
+       Clínica CardioVita — Contato (pages/contato.html)
+       Descrição: Formulário de contato, endereço, telefones e mapa
+       ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Entre em contato com a Clínica CardioVita. Agende sua consulta por telefone, WhatsApp ou formulário." />
+  <title>Contato — CardioVita</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <style>
+    /* ---- HERO INTERNO ---- */
+    .page-hero {
+      background: linear-gradient(135deg, var(--cor-primaria) 60%, #163760 100%);
+      color: #fff; padding: 72px 0 60px; text-align: center;
+    }
+    .page-hero h1 { color: #fff; margin-bottom: .5rem; }
+    .page-hero p  { color: #b0c4de; }
+    .breadcrumb {
+      display: flex; justify-content: center; gap: .5rem;
+      font-size: .82rem; color: #7a9cc6; margin-bottom: 1rem;
+    }
+    .breadcrumb a { color: #7a9cc6; }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb span { color: #5a7faa; }
+
+    /* ---- CARDS DE CONTATO RÁPIDO ---- */
+    .contato-rapido {
+      background: var(--cor-primaria);
+      padding: 40px 0;
+    }
+    .contato-rapido__grade {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .contato-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--raio-lg);
+      padding: 1.5rem;
+      text-align: center;
+      transition: var(--transicao);
+    }
+    .contato-card:hover {
+      background: rgba(255,255,255,.14);
+      transform: translateY(-3px);
+    }
+    .contato-card__icone {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: .6rem;
+    }
+    .contato-card h4 { color: #fff; font-size: .95rem; margin-bottom: .3rem; }
+    .contato-card p  { color: #8fa8c6; font-size: .85rem; margin: 0; }
+    .contato-card a  { color: #b0c4de; }
+    .contato-card a:hover { color: #fff; }
+
+    /* ---- LAYOUT FORMULÁRIO + MAPA ---- */
+    .contato-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* ---- FORMULÁRIO ---- */
+    .form-container {
+      background: var(--cor-bg2);
+      border-radius: var(--raio-lg);
+      padding: 2.5rem;
+      box-shadow: var(--sombra);
+    }
+    .form-container h2 { margin-bottom: .4rem; }
+    .form-container > p { margin-bottom: 2rem; }
+
+    /* Campos em linha */
+    .form-linha {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* Mensagem de sucesso */
+    .msg-sucesso {
+      display: none;
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      border-radius: var(--raio);
+      padding: 1rem 1.2rem;
+      color: #155724;
+      font-size: .92rem;
+      margin-top: 1rem;
+    }
+
+    /* ---- MAPA E ENDEREÇO ---- */
+    .mapa-container { display: flex; flex-direction: column; gap: 1.5rem; }
+    .mapa-placeholder {
+      background: var(--cor-linha);
+      border: 2px dashed var(--cor-borda);
+      border-radius: var(--raio-lg);
+      height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      color: #8fa8c6;
+      font-size: .9rem;
+      text-align: center;
+      padding: 1rem;
+    }
+    .mapa-placeholder span:first-child { font-size: 3rem; }
+
+    /* Card de endereço detalhado */
+    .endereco-card {
+      background: var(--cor-bg2);
+      border-radius: var(--raio-lg);
+      padding: 2rem;
+      box-shadow: var(--sombra);
+    }
+    .endereco-card h3 { margin-bottom: 1.2rem; }
+    .endereco-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+    .endereco-item:last-child { margin-bottom: 0; }
+    .endereco-icone {
+      width: 38px; height: 38px;
+      background: #fdecea;
+      color: var(--cor-acento);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .endereco-item h4 { font-size: .9rem; margin-bottom: .1rem; }
+    .endereco-item p  { font-size: .88rem; margin: 0; }
+    .endereco-item a  { color: var(--cor-acento); }
+    .endereco-item a:hover { text-decoration: underline; }
+
+    /* ---- FAQ ---- */
+    .faq__item {
+      border-bottom: 1px solid var(--cor-borda);
+      padding: 1.2rem 0;
+    }
+    .faq__item:last-child { border-bottom: none; }
+    .faq__pergunta {
+      font-weight: 700;
+      color: var(--cor-primaria);
+      margin-bottom: .5rem;
+      font-size: .95rem;
+    }
+    .faq__resposta { font-size: .9rem; color: var(--cor-texto2); margin: 0; }
+
+    @media (max-width: 900px) {
+      .contato-rapido__grade { grid-template-columns: repeat(2, 1fr); }
+      .contato-layout { grid-template-columns: 1fr; }
+      .form-linha { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .contato-rapido__grade { grid-template-columns: 1fr; }
+      .form-container { padding: 1.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- CABEÇALHO -->
+  <header class="cabecalho" role="banner">
+    <div class="cabecalho__inner">
+      <a href="../index.html" class="logo" aria-label="CardioVita — Página inicial">
+        <div class="logo__icone" aria-hidden="true">♥</div>
+        <div>
+          <div class="logo__nome">Cardio<span>Vita</span></div>
+          <div class="logo__especialidade">Clínica de Cardiologia</div>
+        </div>
+      </a>
+      <button class="nav__toggle" aria-label="Abrir menu" id="menuToggle">
+        <span></span><span></span><span></span>
+      </button>
+      <nav aria-label="Navegação principal">
+        <ul class="nav__lista" id="navLista" role="list">
+          <li><a href="../index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="horario.html">Horários</a></li>
+          <li><a href="contato.html" class="ativo">Contato</a></li>
+          <li><a href="contato.html" class="btn btn--primario" style="padding:.5rem 1.3rem">Agendar</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- HERO INTERNO -->
+  <section class="page-hero" aria-labelledby="contato-titulo">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Caminho de navegação">
+        <a href="../index.html">Início</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">Contato</span>
+      </nav>
+      <h1 id="contato-titulo">Fale Conosco</h1>
+      <p>Estamos prontos para atender você. Escolha a melhor forma de contato.</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CARDS DE CONTATO RÁPIDO
+       ============================================================ -->
+  <div class="contato-rapido" aria-label="Opções de contato rápido">
+    <div class="container">
+      <div class="contato-rapido__grade">
+
+        <div class="contato-card">
+          <span class="contato-card__icone" aria-hidden="true">📞</span>
+          <h4>Telefone</h4>
+          <p><a href="tel:+558130000000">(81) 3000-0000</a></p>
+        </div>
+
+        <div class="contato-card">
+          <span class="contato-card__icone" aria-hidden="true">💬</span>
+          <h4>WhatsApp</h4>
+          <p><a href="https://wa.me/5581990000000" target="_blank" rel="noopener">(81) 99000-0000</a></p>
+        </div>
+
+        <div class="contato-card">
+          <span class="contato-card__icone" aria-hidden="true">✉️</span>
+          <h4>E-mail</h4>
+          <p><a href="mailto:contato@cardiovita.com.br">contato@cardiovita.com.br</a></p>
+        </div>
+
+        <div class="contato-card">
+          <span class="contato-card__icone" aria-hidden="true">🕐</span>
+          <h4>Atendimento</h4>
+          <p>Seg–Sex 07h30–18h30<br>Sáb 08h–12h</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       SEÇÃO PRINCIPAL — FORMULÁRIO + MAPA
+       ============================================================ -->
+  <section class="secao" aria-labelledby="form-titulo">
+    <div class="container">
+      <div class="contato-layout">
+
+        <!-- FORMULÁRIO DE CONTATO -->
+        <div class="form-container">
+          <h2 id="form-titulo">Envie uma Mensagem</h2>
+          <div class="linha-acento"></div>
+          <p>Preencha o formulário e nossa equipe responderá em até 24 horas úteis.</p>
+
+          <!-- 
+            Nota: Em produção, conectar este formulário a um back-end
+            (PHP, Node.js) ou serviço como Formspree / EmailJS.
+          -->
+          <form id="formContato" action="#" method="post" novalidate aria-label="Formulário de contato">
+
+            <!-- Linha 1: Nome e Email -->
+            <div class="form-linha">
+              <div class="form-grupo">
+                <label for="nome">Nome Completo *</label>
+                <input
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  placeholder="Seu nome completo"
+                  required
+                  autocomplete="name"
+                  aria-required="true"
+                />
+              </div>
+              <div class="form-grupo">
+                <label for="email">E-mail *</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="seu@email.com"
+                  required
+                  autocomplete="email"
+                  aria-required="true"
+                />
+              </div>
+            </div>
+
+            <!-- Linha 2: Telefone e Assunto -->
+            <div class="form-linha">
+              <div class="form-grupo">
+                <label for="telefone">Telefone / WhatsApp</label>
+                <input
+                  type="tel"
+                  id="telefone"
+                  name="telefone"
+                  placeholder="(81) 90000-0000"
+                  autocomplete="tel"
+                />
+              </div>
+              <div class="form-grupo">
+                <label for="assunto">Assunto *</label>
+                <select id="assunto" name="assunto" required aria-required="true">
+                  <option value="" disabled selected>Selecione um assunto</option>
+                  <option value="agendamento">Agendamento de Consulta</option>
+                  <option value="exame">Agendamento de Exame</option>
+                  <option value="resultado">Dúvida sobre Resultado</option>
+                  <option value="convenio">Informação sobre Convênio</option>
+                  <option value="cancelamento">Cancelamento / Remarcação</option>
+                  <option value="outro">Outro assunto</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Mensagem -->
+            <div class="form-grupo">
+              <label for="mensagem">Mensagem *</label>
+              <textarea
+                id="mensagem"
+                name="mensagem"
+                placeholder="Escreva sua mensagem aqui. Se for agendar, informe o médico preferido e sua disponibilidade de dias e horários."
+                required
+                aria-required="true"
+                rows="5"
+              ></textarea>
+            </div>
+
+            <!-- Como conheceu -->
+            <div class="form-grupo">
+              <label for="origem">Como nos conheceu?</label>
+              <select id="origem" name="origem">
+                <option value="" disabled selected>Selecione (opcional)</option>
+                <option value="indicacao">Indicação de amigo/familiar</option>
+                <option value="google">Pesquisa no Google</option>
+                <option value="instagram">Instagram / Redes sociais</option>
+                <option value="medico">Indicação médica</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+
+            <!-- Botões de enviar e limpar -->
+            <div class="form-botoes">
+              <button type="submit" class="btn btn--primario">
+                Enviar Mensagem ✉️
+              </button>
+              <button type="reset" class="btn btn--outline" onclick="limparForm()">
+                Limpar Campos
+              </button>
+            </div>
+
+            <!-- Mensagem de feedback (aparece via JS) -->
+            <div class="msg-sucesso" id="msgSucesso" role="alert" aria-live="polite">
+              ✅ <strong>Mensagem enviada!</strong> Entraremos em contato em até 24 horas úteis.
+            </div>
+
+          </form>
+        </div><!-- /form-container -->
+
+
+        <!-- MAPA E ENDEREÇO -->
+        <div class="mapa-container">
+
+          <!-- Placeholder do mapa -->
+          <!-- Em produção: substitua por iframe do Google Maps com endereço real -->
+          <div class="mapa-placeholder" role="img" aria-label="Localização da clínica no mapa">
+            <span aria-hidden="true">🗺️</span>
+            <strong>[ Mapa da Localização ]</strong>
+            <span>Av. Rio Branco, 420 — Centro</span>
+            <span>Caruaru — PE, CEP 55000-000</span>
+            <small style="margin-top:.5rem;color:#aab8c6">
+              Substitua por iframe do Google Maps<br>
+              com o endereço real da clínica
+            </small>
+          </div>
+
+          <!-- 
+            Exemplo de como inserir Google Maps real:
+            <iframe
+              src="https://maps.google.com/maps?q=SEU+ENDERECO&output=embed"
+              width="100%" height="280"
+              style="border:0;border-radius:var(--raio-lg)"
+              allowfullscreen loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Localização da CardioVita no mapa"
+            ></iframe>
+          -->
+
+          <!-- Card de endereço detalhado -->
+          <address class="endereco-card" style="font-style:normal" aria-label="Informações de contato e endereço">
+            <h3>Como Chegar</h3>
+
+            <div class="endereco-item">
+              <div class="endereco-icone" aria-hidden="true">📍</div>
+              <div>
+                <h4>Endereço</h4>
+                <p>Av. Rio Branco, 420 — Centro<br>Caruaru — PE, CEP 55000-000</p>
+              </div>
+            </div>
+
+            <div class="endereco-item">
+              <div class="endereco-icone" aria-hidden="true">🚗</div>
+              <div>
+                <h4>Estacionamento</h4>
+                <p>Estacionamento próprio com 20 vagas, sendo 2 para PcD. Entrada pela Rua XV de Novembro.</p>
+              </div>
+            </div>
+
+            <div class="endereco-item">
+              <div class="endereco-icone" aria-hidden="true">🚌</div>
+              <div>
+                <h4>Transporte Público</h4>
+                <p>Linhas 01, 05 e 12. Ponto de ônibus a 50m da clínica na Praça Coronel João Guilherme.</p>
+              </div>
+            </div>
+
+            <div class="endereco-item">
+              <div class="endereco-icone" aria-hidden="true">📞</div>
+              <div>
+                <h4>Telefones</h4>
+                <p>
+                  <a href="tel:+558130000000">(81) 3000-0000</a> — Recepção<br>
+                  <a href="https://wa.me/5581990000000" target="_blank" rel="noopener">(81) 99000-0000</a> — WhatsApp
+                </p>
+              </div>
+            </div>
+
+            <div class="endereco-item">
+              <div class="endereco-icone" aria-hidden="true">✉️</div>
+              <div>
+                <h4>E-mail</h4>
+                <p>
+                  <a href="mailto:contato@cardiovita.com.br">contato@cardiovita.com.br</a><br>
+                  <a href="mailto:agendamento@cardiovita.com.br">agendamento@cardiovita.com.br</a>
+                </p>
+              </div>
+            </div>
+
+          </address><!-- /endereco-card -->
+        </div><!-- /mapa-container -->
+
+      </div><!-- /contato-layout -->
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEÇÃO FAQ
+       ============================================================ -->
+  <section class="secao secao--cinza" aria-labelledby="faq-titulo">
+    <div class="container">
+
+      <div class="grade-2" style="gap:4rem;align-items:start">
+        <div>
+          <h2 id="faq-titulo">Perguntas Frequentes</h2>
+          <div class="linha-acento"></div>
+          <p>Dúvidas comuns sobre agendamento e atendimento na CardioVita.</p>
+
+          <div>
+            <div class="faq__item">
+              <p class="faq__pergunta">Preciso de encaminhamento para consultar?</p>
+              <p class="faq__resposta">Não é necessário encaminhamento para consultas particulares. Para convênios, verifique as regras do seu plano.</p>
+            </div>
+            <div class="faq__item">
+              <p class="faq__pergunta">Com quanto de antecedência devo agendar?</p>
+              <p class="faq__resposta">Recomendamos agendar com pelo menos 3 dias de antecedência. Para exames como Holter e MAPA, com 5 dias de antecedência.</p>
+            </div>
+            <div class="faq__item">
+              <p class="faq__pergunta">O que devo levar na primeira consulta?</p>
+              <p class="faq__resposta">RG, CPF, carteirinha do convênio (se houver), lista de medicamentos em uso e exames anteriores que possua.</p>
+            </div>
+            <div class="faq__item">
+              <p class="faq__pergunta">Como faço para cancelar ou remarcar?</p>
+              <p class="faq__resposta">Ligue ou envie WhatsApp com pelo menos 24 horas de antecedência para liberar o horário a outro paciente.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card de destaque WhatsApp -->
+        <div>
+          <div style="background:linear-gradient(135deg,#25d366,#128c7e);border-radius:var(--raio-lg);padding:2.5rem;text-align:center;color:#fff">
+            <div style="font-size:3.5rem;margin-bottom:1rem" aria-hidden="true">💬</div>
+            <h3 style="color:#fff;font-size:1.4rem;margin-bottom:.8rem">Atendimento pelo WhatsApp</h3>
+            <p style="color:rgba(255,255,255,.85);margin-bottom:1.8rem">
+              Para agendamentos rápidos e dúvidas simples, nossa equipe está disponível via WhatsApp durante o horário de funcionamento.
+            </p>
+            <a href="https://wa.me/5581990000000?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta%20na%20CardioVita."
+               target="_blank" rel="noopener"
+               class="btn btn--branco"
+               aria-label="Iniciar conversa no WhatsApp com a CardioVita">
+              Iniciar Conversa →
+            </a>
+            <p style="color:rgba(255,255,255,.65);font-size:.8rem;margin-top:1rem;margin-bottom:0">
+              (81) 99000-0000 — Seg a Sex, 08h–18h
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- RODAPÉ -->
+  <footer class="rodape" role="contentinfo">
+    <div class="container">
+      <div class="rodape__grade">
+        <div>
+          <div class="rodape__logo-nome">Cardio<span>Vita</span></div>
+          <p>Clínica de Cardiologia dedicada à saúde do seu coração.</p>
+          <p style="margin-top:.5rem">📍 Av. Rio Branco, 420 — Caruaru, PE</p>
+        </div>
+        <div>
+          <h4>Navegação</h4>
+          <ul class="rodape__lista" role="list">
+            <li><a href="../index.html">Início</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+            <li><a href="horario.html">Horários</a></li>
+            <li><a href="contato.html">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Serviços</h4>
+          <ul class="rodape__lista" role="list">
+            <li><a href="#">Consulta Cardiológica</a></li>
+            <li><a href="#">Eletrocardiograma</a></li>
+            <li><a href="#">Ecocardiograma</a></li>
+            <li><a href="#">Holter 24h</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <p>📞 (81) 3000-0000</p>
+          <p>💬 (81) 99000-0000</p>
+          <p>✉️ contato@cardiovita.com.br</p>
+        </div>
+      </div>
+      <div class="rodape__copy">
+        <p>© 2025 CardioVita — Projeto de estudo Front-End.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script>
+    // Menu mobile
+    const toggle = document.getElementById('menuToggle');
+    const navLista = document.getElementById('navLista');
+    toggle.addEventListener('click', () => {
+      const aberto = navLista.classList.toggle('aberto');
+      toggle.setAttribute('aria-expanded', aberto);
+    });
+
+    // Simulação de envio do formulário (sem back-end real)
+    const form = document.getElementById('formContato');
+    const msgSucesso = document.getElementById('msgSucesso');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // Impede envio real (sem back-end)
+
+      // Validação simples dos campos obrigatórios
+      const nome     = document.getElementById('nome').value.trim();
+      const email    = document.getElementById('email').value.trim();
+      const assunto  = document.getElementById('assunto').value;
+      const mensagem = document.getElementById('mensagem').value.trim();
+
+      if (!nome || !email || !assunto || !mensagem) {
+        alert('Por favor, preencha todos os campos obrigatórios (*).');
+        return;
+      }
+
+      // Simulação de envio bem-sucedido
+      msgSucesso.style.display = 'block';
+      form.reset();
+
+      // Oculta a mensagem após 6 segundos
+      setTimeout(() => { msgSucesso.style.display = 'none'; }, 6000);
+    });
+
+    // Função auxiliar para limpar o formulário
+    function limparForm() {
+      msgSucesso.style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

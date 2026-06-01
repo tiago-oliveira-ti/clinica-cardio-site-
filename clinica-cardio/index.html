@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- ============================================================
+       Clínica CardioVita — Página Inicial (index.html)
+       Descrição: Página principal com banner, apresentação e serviços
+       ============================================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Clínica CardioVita — Cardiologia especializada com cuidado humanizado em Caruaru-PE." />
+  <title>CardioVita — Clínica de Cardiologia</title>
+
+  <!-- Fontes do Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Folha de estilo global -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Estilos específicos desta página -->
+  <style>
+    /* ---- HERO / BANNER ---- */
+    .hero {
+      background: linear-gradient(135deg, var(--cor-primaria) 55%, #1a4a7c 100%);
+      color: #fff;
+      padding: 100px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decoração geométrica de fundo */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 520px; height: 520px;
+      border-radius: 50%;
+      background: rgba(200,16,46,.12);
+      top: -140px; right: -100px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      bottom: -80px; left: 8%;
+    }
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 3rem;
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(200,16,46,.25);
+      color: #f7b2bb;
+      border: 1px solid rgba(200,16,46,.4);
+      padding: .35rem .9rem;
+      border-radius: 99px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 { color: #fff; margin-bottom: 1.2rem; }
+    .hero p  { color: #b0c4de; font-size: 1.1rem; margin-bottom: 2rem; }
+    .hero__botoes { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero__visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero__cartao {
+      background: rgba(255,255,255,.10);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: var(--raio-lg);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      width: 100%;
+      max-width: 320px;
+    }
+    .hero__cartao-icone {
+      font-size: 4rem;
+      margin-bottom: .8rem;
+      display: block;
+    }
+    .hero__cartao h3 { color: #fff; font-size: 1.3rem; margin-bottom: .5rem; }
+    .hero__cartao p  { color: #b0c4de; font-size: .9rem; margin: 0; }
+    .hero__stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: left; }
+    .stat__num { font-size: 1.8rem; font-weight: 700; color: #fff; line-height: 1; }
+    .stat__txt { font-size: .75rem; color: #8fa8c6; text-transform: uppercase; letter-spacing: .05em; }
+
+    /* ---- DIFERENCIAIS ---- */
+    .diferenciais { padding: 80px 0; }
+    .diferencial__cabecalho { text-align: center; margin-bottom: 3rem; }
+
+    /* ---- ESPECIALIDADE ---- */
+    .especialidade {
+      background: linear-gradient(120deg, #0a2540 60%, #163760 100%);
+      color: #fff;
+      padding: 80px 0;
+    }
+    .especialidade h2 { color: #fff; }
+    .especialidade p  { color: #b0c4de; }
+    .especialidade .linha-acento { background: var(--cor-acento); }
+    .esp__lista { margin: 1.5rem 0 2rem; display: flex; flex-direction: column; gap: .8rem; }
+    .esp__lista li {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      color: #b0c4de;
+      font-size: .95rem;
+    }
+    .esp__lista li span:first-child {
+      color: var(--cor-acento);
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .esp__img-placeholder {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--raio-lg);
+      height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      color: #6a8ab2;
+      font-size: .9rem;
+    }
+    .esp__img-placeholder span:first-child { font-size: 3.5rem; }
+
+    /* ---- CTA ---- */
+    .cta {
+      background: var(--cor-acento);
+      color: #fff;
+      text-align: center;
+      padding: 72px 0;
+    }
+    .cta h2 { color: #fff; margin-bottom: .5rem; }
+    .cta p  { color: rgba(255,255,255,.82); margin-bottom: 2rem; }
+
+    @media (max-width: 768px) {
+      .hero__inner { grid-template-columns: 1fr; }
+      .hero__visual { display: none; }
+      .hero { padding: 72px 0 60px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       CABEÇALHO — Presente em todas as páginas
+       ============================================================ -->
+  <header class="cabecalho" role="banner">
+    <div class="cabecalho__inner">
+
+      <!-- Logotipo -->
+      <a href="index.html" class="logo" aria-label="CardioVita — Página inicial">
+        <div class="logo__icone" aria-hidden="true">♥</div>
+        <div>
+          <div class="logo__nome">Cardio<span>Vita</span></div>
+          <div class="logo__especialidade">Clínica de Cardiologia</div>
+        </div>
+      </a>
+
+      <!-- Botão menu mobile -->
+      <button class="nav__toggle" aria-label="Abrir menu" id="menuToggle">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- Navegação principal -->
+      <nav aria-label="Navegação principal">
+        <ul class="nav__lista" id="navLista" role="list">
+          <li><a href="index.html" class="ativo">Início</a></li>
+          <li><a href="pages/sobre.html">Sobre</a></li>
+          <li><a href="pages/horario.html">Horários</a></li>
+          <li><a href="pages/contato.html">Contato</a></li>
+          <li><a href="pages/contato.html" class="btn btn--primario" style="padding:.5rem 1.3rem">Agendar</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       SEÇÃO HERO — Banner principal
+       ============================================================ -->
+  <section class="hero" aria-labelledby="hero-titulo">
+    <div class="hero__inner">
+
+      <!-- Texto do lado esquerdo -->
+      <div class="hero__texto">
+        <div class="hero__badge">
+          <span aria-hidden="true">♥</span> Cardiologia Especializada
+        </div>
+        <h1 id="hero-titulo">Cuidamos do seu coração com excelência</h1>
+        <p>
+          Na CardioVita, unimos tecnologia de ponta e atendimento humanizado para 
+          diagnóstico e tratamento completo das doenças cardiovasculares.
+        </p>
+        <div class="hero__botoes">
+          <a href="pages/contato.html" class="btn btn--branco">Agendar Consulta</a>
+          <a href="pages/sobre.html" class="btn btn--outline" style="color:#fff;border-color:rgba(255,255,255,.5)">Conheça a Clínica</a>
+        </div>
+        <div class="hero__stats">
+          <div class="stat">
+            <div class="stat__num">+15</div>
+            <div class="stat__txt">Anos de atuação</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">+8k</div>
+            <div class="stat__txt">Pacientes atendidos</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">6</div>
+            <div class="stat__txt">Especialistas</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card visual direito -->
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero__cartao">
+          <span class="hero__cartao-icone">🫀</span>
+          <h3>Exames Cardiológicos</h3>
+          <p>Eletrocardiograma, Ecocardiograma, Holter 24h e muito mais.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEÇÃO DIFERENCIAIS — Cards de benefícios
+       ============================================================ -->
+  <section class="diferenciais secao" aria-labelledby="dif-titulo">
+    <div class="container">
+
+      <div class="diferencial__cabecalho">
+        <h2 id="dif-titulo">Por que escolher a CardioVita?</h2>
+        <div class="linha-acento linha-acento--centro"></div>
+        <p style="max-width:560px;margin:0 auto">
+          Oferecemos uma experiência clínica completa, focada na sua saúde cardiovascular 
+          e no seu bem-estar.
+        </p>
+      </div>
+
+      <!-- Grade de cards -->
+      <div class="grade-4">
+
+        <article class="card" aria-label="Equipe especializada">
+          <div class="card__icone" aria-hidden="true">👨‍⚕️</div>
+          <h3>Equipe Especializada</h3>
+          <p>Cardiologistas com formação em centros de referência nacional e internacional.</p>
+        </article>
+
+        <article class="card" aria-label="Tecnologia avançada">
+          <div class="card__icone" aria-hidden="true">🔬</div>
+          <h3>Tecnologia Avançada</h3>
+          <p>Equipamentos de última geração para diagnósticos precisos e rápidos.</p>
+        </article>
+
+        <article class="card" aria-label="Atendimento humanizado">
+          <div class="card__icone" aria-hidden="true">🤝</div>
+          <h3>Atendimento Humanizado</h3>
+          <p>Escuta ativa e acolhimento para que você se sinta seguro em cada consulta.</p>
+        </article>
+
+        <article class="card" aria-label="Agendamento fácil">
+          <div class="card__icone" aria-hidden="true">📅</div>
+          <h3>Agendamento Fácil</h3>
+          <p>Agende pelo telefone, WhatsApp ou pessoalmente com horários flexíveis.</p>
+        </article>
+
+      </div><!-- /grade-4 -->
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEÇÃO ESPECIALIDADE — Detalhes sobre cardiologia
+       ============================================================ -->
+  <section class="especialidade" aria-labelledby="esp-titulo">
+    <div class="container">
+      <div class="grade-2" style="align-items:center;gap:4rem">
+
+        <!-- Texto -->
+        <div>
+          <h2 id="esp-titulo">Cardiologia Completa</h2>
+          <div class="linha-acento"></div>
+          <p>
+            A Cardiologia é a especialidade dedicada ao coração e ao sistema 
+            circulatório. Na CardioVita, oferecemos desde a prevenção até o 
+            acompanhamento pós-tratamento.
+          </p>
+          <ul class="esp__lista" role="list">
+            <li><span aria-hidden="true">♥</span><span>Consultas preventivas e check-up cardiovascular</span></li>
+            <li><span aria-hidden="true">♥</span><span>Diagnóstico de hipertensão, arritmias e insuficiência cardíaca</span></li>
+            <li><span aria-hidden="true">♥</span><span>Eletrocardiograma (ECG) e Ecocardiograma</span></li>
+            <li><span aria-hidden="true">♥</span><span>Monitoramento Holter 24 horas</span></li>
+            <li><span aria-hidden="true">♥</span><span>Teste ergométrico (esteira)</span></li>
+            <li><span aria-hidden="true">♥</span><span>Acompanhamento de pacientes pós-cirúrgicos</span></li>
+          </ul>
+          <a href="pages/horario.html" class="btn btn--primario">Ver Horários e Valores</a>
+        </div>
+
+        <!-- Placeholder de imagem -->
+        <div class="esp__img-placeholder" role="img" aria-label="Ilustração de exame cardiológico">
+          <span aria-hidden="true">🫀</span>
+          <span>[ Imagem do consultório ]</span>
+          <small>Adicione uma foto real aqui</small>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEÇÃO CTA — Chamada para ação
+       ============================================================ -->
+  <section class="cta" aria-labelledby="cta-titulo">
+    <div class="container">
+      <h2 id="cta-titulo">Cuide do seu coração hoje mesmo</h2>
+      <p>Agende sua consulta cardiológica e invista na sua saúde cardiovascular.</p>
+      <a href="pages/contato.html" class="btn btn--branco">Agendar Consulta →</a>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       RODAPÉ
+       ============================================================ -->
+  <footer class="rodape" role="contentinfo">
+    <div class="container">
+      <div class="rodape__grade">
+
+        <!-- Coluna 1: Sobre a clínica -->
+        <div>
+          <div class="rodape__logo-nome">Cardio<span>Vita</span></div>
+          <p>Clínica de Cardiologia dedicada à saúde do seu coração, com atendimento humanizado e tecnologia de excelência.</p>
+          <p style="margin-top:.5rem">📍 Av. Rio Branco, 420 — Caruaru, PE</p>
+        </div>
+
+        <!-- Coluna 2: Navegação rápida -->
+        <div>
+          <h4>Navegação</h4>
+          <ul class="rodape__lista" role="list">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="pages/sobre.html">Sobre</a></li>
+            <li><a href="pages/horario.html">Horários</a></li>
+            <li><a href="pages/contato.html">Contato</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Serviços -->
+        <div>
+          <h4>Serviços</h4>
+          <ul class="rodape__lista" role="list">
+            <li><a href="#">Consulta Cardiológica</a></li>
+            <li><a href="#">Eletrocardiograma</a></li>
+            <li><a href="#">Ecocardiograma</a></li>
+            <li><a href="#">Holter 24h</a></li>
+            <li><a href="#">Teste Ergométrico</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Contato rápido -->
+        <div>
+          <h4>Contato</h4>
+          <p>📞 (81) 3000-0000</p>
+          <p>💬 (81) 99000-0000</p>
+          <p>✉️ contato@cardiovita.com.br</p>
+          <p style="margin-top:.8rem">Seg–Sex: 08h–18h<br>Sáb: 08h–12h</p>
+        </div>
+
+      </div><!-- /rodape__grade -->
+
+      <!-- Linha de copyright -->
+      <div class="rodape__copy">
+        <p>© 2025 CardioVita — Clínica de Cardiologia. Projeto de estudo — Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       SCRIPT — Menu mobile
+       ============================================================ -->
+  <script>
+    // Alterna menu mobile ao clicar no botão hambúrguer
+    const toggle = document.getElementById('menuToggle');
+    const navLista = document.getElementById('navLista');
+
+    toggle.addEventListener('click', () => {
+      const aberto = navLista.classList.toggle('aberto');
+      toggle.setAttribute('aria-expanded', aberto);
+      toggle.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+    });
+  </script>
+
+</body>
+</html>
