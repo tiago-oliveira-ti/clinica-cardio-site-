@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🫀 CardioVita — Site de Clínica Médica
 > Projeto de estudo de Front-End | HTML5 + CSS3 | Sem frameworks
 
